@@ -1,0 +1,27 @@
+[submodule "cpp_range"]
+	path = cpp_range
+	url = https://github.com/whoshuu/cpp_range.git
+[submodule "cpr"]
+	path = cpr
+	url = https://github.com/whoshuu/cpr.git
+[submodule "easyloggingpp"]
+	path = easyloggingpp
+	url = https://github.com/easylogging/easyloggingpp.git
+[submodule "tinyxml2"]
+	path = tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git
+[submodule "gumbo-query"]
+	path = gumbo-query
+	url = https://github.com/lazytiger/gumbo-query.git
+[submodule "gumbo-parser"]
+	path = gumbo-parser
+	url = https://github.com/google/gumbo-parser.git
+[submodule "json"]
+	path = json
+	url = https://github.com/nlohmann/json.git
+[submodule "sigslot11"]
+	path = sigslot11
+	url = https://github.com/arvidsson/sigslot11.git
+[submodule "threads"]
+	path = threads
+	url = https://github.com/vichargrave/threads.git
