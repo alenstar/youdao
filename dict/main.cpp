@@ -4,11 +4,13 @@
 #include "easylogging++.h"
 INITIALIZE_EASYLOGGINGPP
 
+#include <QApplication>
+
 int main(int argc , const char** argv) {
     std::string word;
     if (argc < 2) {
-        exit(0);
-        printf("usage: %s word\n", argv[0]);
+        //exit(0);
+        //printf("usage: %s word\n", argv[0]);
     } else {
         for (int i = 1; i < argc ; i++) {
             if (word.size()) {

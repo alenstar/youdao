@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = youdao
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra
 
 CONFIG(debug, debug|release) {
@@ -46,6 +46,7 @@ HEADERS += dict/def.h \
            dict/dict.h \
            dict/youdao.h \
            easyloggingpp/src/easylogging++.h \
+    ui/querydialog.h
 
 
 SOURCES += dict/main.cpp \
@@ -69,10 +70,14 @@ SOURCES += dict/main.cpp \
     cpr/cpr/proxies.cpp \
     cpr/cpr/session.cpp \
     cpr/cpr/util.cpp \
-    tinyxml2/tinyxml2.cpp
+    tinyxml2/tinyxml2.cpp \
+    ui/querydialog.cpp
 
 
 LIBS += -lcurl -pthread \
     -Wl,-rpath ./ \
     -L./ \
     $$PWD/gumbo/lib/libgumbo.so
+
+FORMS += \
+    ui/querydialog.ui
