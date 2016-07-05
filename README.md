@@ -1,6 +1,6 @@
 # youdao词典
 
 #build 
-git submodule update --init --recursive
-qmake 
-make
+1. git submodule update --init --recursive
+2. qmake 
+3. make
