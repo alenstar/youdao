@@ -9,7 +9,8 @@
 
 // http://dict.youdao.com/search?keyfrom=dict.python&q=quit&xmlDetail=true&doctype=xml
 // http://dict.youdao.com/search?keyword=dict&q=hello
-YoudaoDict::YoudaoDict(const char* url) : m_url(url) {
+YoudaoDict::YoudaoDict(const char* url) {
+    m_url = std::string(url);
     /*
     m_params["keyfrom"] = std::string("dict");
     m_headers["User-Agent"] =

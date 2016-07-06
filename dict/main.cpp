@@ -1,16 +1,23 @@
 #include "dict/youdao.h"
-#include "def.h"
+#include "dict/def.h"
 
 #include "easylogging++.h"
 INITIALIZE_EASYLOGGINGPP
 
 #include <QApplication>
+#include "ui/querydialog.h"
 
+Q_DECLARE_METATYPE(dict::ResultVectorPtr)
 int main(int argc , const char** argv) {
     std::string word;
     if (argc < 2) {
         //exit(0);
         //printf("usage: %s word\n", argv[0]);
+        QApplication a(argc, (char**)argv);
+        qRegisterMetaType<dict::ResultVectorPtr>();
+		QueryDialog w;
+		w.show();
+		return a.exec();
     } else {
         for (int i = 1; i < argc ; i++) {
             if (word.size()) {
