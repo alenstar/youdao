@@ -26,6 +26,8 @@ void QueryDialog::on_lineEdit_returnPressed()
 
 void QueryDialog::queryResult(dict::ResultVectorPtr ptr)
 {
+    this->ui->textBrowser->clear();
+    this->ui->lineEdit->clear();
     for(int i = 0; i < ptr->size(); i++) {
         this->ui->textBrowser->append(QString(ptr->at(i - 0).value.c_str()));
         //this->ui->textBrowser->setText(QString(ptr->at(i - 0).value.c_str()));

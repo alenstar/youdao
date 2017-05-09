@@ -18,9 +18,6 @@ void QueryThread::run()
 {
     auto _dict = new YoudaoDict("http://dict.youdao.com/search");
     auto res = _dict->query(_word, 0);
-    for (int i = res->size(); i > 0; i--) {
-        LOGD("%s: %s", res->at(i - 1).session.c_str(), res->at(i - 1).value.c_str());
-    }
     if (res->size() > 0){
         emit this->queryResult(res);
     }

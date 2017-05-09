@@ -38,6 +38,7 @@ DEPENDPATH += . \
 
 
 INCLUDEPATH += . \
+               util \
                cpr/include \
                dict \
                easyloggingpp/src \

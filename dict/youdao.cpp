@@ -6,6 +6,24 @@
 #include <Document.h>
 #include <Selection.h>
 #include <Node.h>
+#include <string_utility.hpp>
+
+std::string string_clear(std::string str) {
+    std::string s;
+    char last = '0';
+    for (auto c : str) {
+        if(c == '\n' || c == '\r' || c == ' ') {
+            if (last != c && c == ' ') {
+                s.append(1, c);
+            }
+        } else {
+            s.append(1, c);
+        }
+        last = c;
+    }
+    return s;
+}
+
 
 // http://dict.youdao.com/search?keyfrom=dict.python&q=quit&xmlDetail=true&doctype=xml
 // http://dict.youdao.com/search?keyword=dict&q=hello
@@ -44,7 +62,6 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
         //LOGD("RES: %s", r.text.c_str());
             tinyxml2::XMLDocument doc;
             doc.Parse(r.text.c_str());
-            //auto node = doc.RootElement()->FirstChildElement("yodao-web-dict")->FirstChildElement("translation");
             auto node = doc.RootElement()->FirstChild();
             LOGD("node: %s", node->ToElement()->GetText());
             while (node) {
@@ -99,35 +116,31 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
         dict::ResultVectorPtr values = std::make_shared<dict::ResultVector>();
         CDocument doc;
         doc.parse(r.text.c_str());
-
         CSelection c = doc.find("div #phrsListTab span.keyword");
         for (size_t i = c.nodeNum(); i != 0; i--) {
-            values->insert("keyword", c.nodeAt(c.nodeNum() - i).text());
+            values->insert("keyword", string_utility<std::string>::trim(string_clear(c.nodeAt(c.nodeNum() - i).text())));
         }
 
         c = doc.find("div #phrsListTab ul li");
         for (size_t i = c.nodeNum(); i != 0; i--) {
              LOGD("%s", c.nodeAt(c.nodeNum() - i).text().c_str());
-            //values->insert("translation", c.nodeAt(c.nodeNum() - i).text());
+             values->insert("translation", string_utility<std::string>::trim(string_clear(c.nodeAt(c.nodeNum() - i).text())));
         }
-        //values->insert("translation", c.);
-        // LOGD("ul:%s", node.text().c_str());
 
         c = doc.find("div #phrsListTab p.additional");
         for (size_t i = c.nodeNum(); i != 0; i--) {
-            values->insert("additional", c.nodeAt(c.nodeNum() - i).text());
+            values->insert("additional", string_utility<std::string>::trim(string_clear(c.nodeAt(c.nodeNum() - i).text())));
         }
 
         c = doc.find("p.wordGroup");
         for (size_t i = c.nodeNum(); i != 0; i--) {
-            values->insert("wordgroup", c.nodeAt(c.nodeNum() - i).text());
+            values->insert("wordgroup", string_utility<std::string>::trim(string_clear(c.nodeAt(c.nodeNum() - i).text())));
         }
 
         c = doc.find("div#bk div.content p");
         for (size_t i = c.nodeNum(); i != 0; i--) {
-            values->insert("bk", c.nodeAt(c.nodeNum() - i).text());
+            values->insert("bk", string_utility<std::string>::trim(string_clear(c.nodeAt(c.nodeNum() - i).text())));
         }
-
         return values;
     }
     }
