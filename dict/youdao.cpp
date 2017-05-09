@@ -58,7 +58,6 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
                     values->insert("translation", std::string(sub->FirstChildElement("content")->GetText()));
                     sub = sub->NextSiblingElement("translation");
                     }
-
                 } else if (memcmp(node->Value(), "yodao-web-dict", 14) == 0) {
                     auto sub = node->FirstChildElement("web-translation");
                     while (sub) {
@@ -108,9 +107,10 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
 
         c = doc.find("div #phrsListTab ul li");
         for (size_t i = c.nodeNum(); i != 0; i--) {
-            // LOGD("%s", c.nodeAt(c.nodeNum() - i).text().c_str());
-            values->insert("translation", c.nodeAt(c.nodeNum() - i).text());
+             LOGD("%s", c.nodeAt(c.nodeNum() - i).text().c_str());
+            //values->insert("translation", c.nodeAt(c.nodeNum() - i).text());
         }
+        //values->insert("translation", c.);
         // LOGD("ul:%s", node.text().c_str());
 
         c = doc.find("div #phrsListTab p.additional");

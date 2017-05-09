@@ -9,10 +9,17 @@ INITIALIZE_EASYLOGGINGPP
 
 Q_DECLARE_METATYPE(dict::ResultVectorPtr)
 int main(int argc , const char** argv) {
+    START_EASYLOGGINGPP(argc, argv);
+    el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Format, "%datetime %func[%fbase] %level: %msg");
     std::string word;
     if (argc < 2) {
-        //exit(0);
-        //printf("usage: %s word\n", argv[0]);
+        #if (QT_VERSION <= QT_VERSION_CHECK(5,0,0))
+        QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+        QTextCodec::setCodecForLocale(codec);
+        QTextCodec::setCodecForCStrings(codec);
+        QTextCodec::setCodecForTr(codec);
+        #endif
+
         QApplication a(argc, (char**)argv);
         qRegisterMetaType<dict::ResultVectorPtr>();
 		QueryDialog w;
@@ -28,7 +35,7 @@ int main(int argc , const char** argv) {
 
             }
     }
-    el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Format, "%datetime %func[%fbase] %level: %msg");
+    //el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Format, "%datetime %func[%fbase] %level: %msg");
 
     YoudaoDict dict("http://dict.youdao.com/search");
     auto res = dict.query(word, 1);

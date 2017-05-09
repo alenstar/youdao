@@ -26,6 +26,9 @@
      <property name="openExternalLinks">
       <bool>false</bool>
      </property>
+     <property name="openLinks">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
   </layout>
