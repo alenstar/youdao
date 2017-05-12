@@ -7,7 +7,7 @@
 #include <Selection.h>
 #include <Node.h>
 #include <string_utility.hpp>
-
+#include <cassert>
 std::string string_clear(std::string str) {
     std::string s;
     char last = '0';
@@ -47,7 +47,8 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
     // m_params["q"] = word;
     // auto res = this->m_bbq->get(m_url, m_params); //, m_headers);
     // LOGD("RES: %s", res.c_str());
-
+    assert(word);
+    dict::ResultVectorPtr values = new dict::ResultVector();
     if (type) {
     auto r = cpr::Get(
             m_url, cpr::Parameters{{"keyfrom", "dict.python"}, {"q", std::string(word)}, {"doctype","xml"}}
@@ -58,7 +59,6 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
             */
                 );
     if (r.text.length() && r.status_code == 200) {
-            dict::ResultVectorPtr values = std::make_shared<dict::ResultVector>();
         //LOGD("RES: %s", r.text.c_str());
             tinyxml2::XMLDocument doc;
             doc.Parse(r.text.c_str());
@@ -113,7 +113,6 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
                          "AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"}});
 
     if (r.text.length() && r.status_code == 200) {
-        dict::ResultVectorPtr values = std::make_shared<dict::ResultVector>();
         CDocument doc;
         doc.parse(r.text.c_str());
         CSelection c = doc.find("div #phrsListTab span.keyword");
@@ -144,7 +143,7 @@ dict::ResultVectorPtr YoudaoDict::query(const char* word, int type) {
         return values;
     }
     }
-    return std::make_shared<dict::ResultVector>();
+    return values;
 }
 
 dict::ResultVectorPtr YoudaoDict::query(std::string word, int type) {

@@ -36,16 +36,16 @@
 #define def_max(a,b) ((a) > (b) ? (a):(b))
 
 #if 0
-#ifdef DEBUG
-    #define LOGD(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__) printf("%s (%4d) DEBUG: %s\n", __FILE__, __LINE__, tmp);}while(0)
-    #define LOGI(...) do{printf("%s (%4d) INFO: ", __FILE__, __LINE__);printf(__VA_ARGS__);printf("\n");}while(0)
-    #define LOGW(...) do{printf("%s (%4d) WARN: ", __FILE__, __LINE__);printf(__VA_ARGS__);printf("\n");}while(0)
-    #define LOGE(...) do{printf("%s (%4d) ERROR: ", __FILE__, __LINE__);printf(__VA_ARGS__);printf("\n");}while(0)
+#if 1 //def DEBUG
+    #define LOGD(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[D]: %s\n", __FILE__, __LINE__, tmp);}while(0)
+    #define LOGI(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[I]: %s\n", __FILE__, __LINE__, tmp);}while(0)
+    #define LOGW(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[W]: %s\n", __FILE__, __LINE__, tmp);}while(0)
+    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILE__, __LINE__, tmp);}while(0)
 #else
     #define LOGI(...)
 	#define LOGD(...) 
 	#define LOGW(...) 
-    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__) printf("%s (%4d) ERROR: %s\n", __FILE__, __LINE__, tmp);}while(0)
+    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILE__, __LINE__, tmp);}while(0)
 #endif
 #else
 #if 1 //def DEBUG
@@ -55,9 +55,9 @@
 	#define LOGW(...) el::Loggers::getLogger("default")->warn(__VA_ARGS__)
     #define LOGE(...) el::Loggers::getLogger("default")->error(__VA_ARGS__)
 #else
-	#define LOGI(...) 
-    #define LOGD(...) (void)
-	#define LOGW(...) 
+    #define LOGI(...)
+    #define LOGD(...)
+    #define LOGW(...)
     #define LOGE(...) el::Loggers::getLogger("default")->error(__VA_ARGS__)
 #endif
 #endif

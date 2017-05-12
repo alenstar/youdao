@@ -66,6 +66,6 @@ public:
    }
 };
 
-typedef std::shared_ptr<ResultVector> ResultVectorPtr;
+typedef ResultVector* ResultVectorPtr;
 };
 #endif

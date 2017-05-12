@@ -8,18 +8,18 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app
 TARGET = youdao
-QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra
+QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -D_GLIBCXX_USE_CXX11_ABI
 
 CONFIG(debug, debug|release) {
     CONFIG -= debug release
     CONFIG += debug
-    DEFINES += DEBUG
+    #DEFINES += DEBUG
+    QMAKE_CXXFLAGS += -DDEBUG
 }
 else{
     CONFIG -= debug release
     CONFIG += release
     QMAKE_CXXFLAGS += -O2
-    #DEFINES += USE_TEXTURE
 }
 
 CONFIG += static
@@ -52,7 +52,9 @@ HEADERS += dict/def.h \
            dict/youdao.h \
            easyloggingpp/src/easylogging++.h \
     ui/querydialog.h \
-    ui/querythread.h
+    thpool/thpoolcpp.h \
+    thpool/thpool.h \
+    thpool/singleton.h
 
 
 SOURCES += dict/main.cpp \
@@ -78,7 +80,8 @@ SOURCES += dict/main.cpp \
     cpr/cpr/util.cpp \
     tinyxml2/tinyxml2.cpp \
     ui/querydialog.cpp \
-    ui/querythread.cpp
+    thpool/thpoolcpp.cpp \
+    thpool/thpool.c
 
 
 LIBS += -lcurl -pthread \

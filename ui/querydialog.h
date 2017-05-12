@@ -2,7 +2,7 @@
 #define QUERYDIALOG_H
 
 #include <QDialog>
-#include "querythread.h"
+#include "dict/dict.h"
 
 namespace Ui {
 class QueryDialog;
@@ -15,13 +15,14 @@ class QueryDialog : public QDialog
 public:
     explicit QueryDialog(QWidget *parent = 0);
     ~QueryDialog();
-
-private slots:
+public slots:
     void on_lineEdit_returnPressed();
-    void queryResult(dict::ResultVectorPtr ptr);
+    void onShowExplain(dict::ResultVectorPtr ptr);
+    void showExplain(dict::ResultVectorPtr ptr);
+signals:
+    void doShowExplain(dict::ResultVectorPtr ptr);
 private:
     Ui::QueryDialog *ui;
-    QueryThread* _query;
 };
 
 #endif // QUERYDIALOG_H

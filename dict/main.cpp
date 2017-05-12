@@ -1,11 +1,11 @@
+#include <QApplication>
+#include "ui/querydialog.h"
+
 #include "dict/youdao.h"
 #include "dict/def.h"
 
 #include "easylogging++.h"
 INITIALIZE_EASYLOGGINGPP
-
-#include <QApplication>
-#include "ui/querydialog.h"
 
 Q_DECLARE_METATYPE(dict::ResultVectorPtr)
 int main(int argc , const char** argv) {
@@ -41,7 +41,6 @@ int main(int argc , const char** argv) {
     auto res = dict.query(word, 1);
     for (int i = res->size(); i > 0; i--) {
         LOGD("%s: %s", res->at(i - 1).session.c_str(), res->at(i - 1).value.c_str());
-        printf("%s: %s\n", res->at(i - 1).session.c_str(), res->at(i - 1).value.c_str());
     }
 	return 0;
 }

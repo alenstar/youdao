@@ -25,3 +25,6 @@
 [submodule "threads"]
 	path = threads
 	url = https://github.com/vichargrave/threads.git
+[submodule "thpool"]
+	path = thpool
+	url = https://github.com/alenstar/thpool.git
