@@ -1,6 +1,11 @@
 # youdao词典
 
-#build 
-1. git submodule update --init --recursive
-2. qmake 
-3. make
+### 初始化子模块   
+``` shell  
+ git submodule update --init --recursive  
+``` 
+
+### 构建  
+``` shell  
+qmake && make
+``` 
