@@ -3,12 +3,12 @@
 
 #include <QDialog>
 #include "dict/dict.h"
-
+#include "mdialog.h"
 namespace Ui {
 class QueryDialog;
 }
 
-class QueryDialog : public QDialog
+class QueryDialog : public MDialog
 {
     Q_OBJECT
 

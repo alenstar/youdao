@@ -41,6 +41,7 @@ INCLUDEPATH += . \
                util \
                cpr/include \
                dict \
+               ui \
                easyloggingpp/src \
                gumbo-query/src \
                gumbo/include
@@ -54,7 +55,11 @@ HEADERS += dict/def.h \
     ui/querydialog.h \
     thpool/thpoolcpp.h \
     thpool/thpool.h \
-    thpool/singleton.h
+    thpool/singleton.h \
+    ui/helper.h \
+    ui/mdialog.h \
+    ui/messagebox.h \
+    ui/lineedit/EnchancedLineEdi.h
 
 
 SOURCES += dict/main.cpp \
@@ -81,7 +86,11 @@ SOURCES += dict/main.cpp \
     tinyxml2/tinyxml2.cpp \
     ui/querydialog.cpp \
     thpool/thpoolcpp.cpp \
-    thpool/thpool.c
+    thpool/thpool.c \
+    ui/helper.cpp \
+    ui/mdialog.cpp \
+    ui/messagebox.cpp \
+    ui/lineedit/lineedit.cpp
 
 
 LIBS += -lcurl -pthread \
@@ -91,3 +100,6 @@ LIBS += -lcurl -pthread \
 
 FORMS += \
     ui/querydialog.ui
+
+RESOURCES += \
+    res/mainwindow.qrc

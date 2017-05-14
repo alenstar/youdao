@@ -158,6 +158,21 @@ dict::ResultVectorPtr YoudaoDict::query(const char *word, int type)
                 values->insert("bk", string_utility<std::string>::trim(string_clear(c.nodeAt(
                                                                                         c.nodeNum() - i).text())));
             }
+
+            // pronounce
+            //c = doc.find("div.baav span.pronounce span.phonetic");
+            c = doc.find("span.phonetic");
+            for (size_t i = c.nodeNum(); i != 0; i--) {
+                values->insert("phonetic", string_utility<std::string>::trim(string_clear(c.nodeAt(
+                c.nodeNum() - i).text())));
+                /*
+                std::string str = string_utility<std::string>::trim(string_clear(c.nodeAt(
+                c.nodeNum() - i).text())).c_str();
+                LOGD(str);
+                LOGD("phonetic: %s", string_utility<std::string>::trim(string_clear(c.nodeAt(
+                c.nodeNum() - i).text())).c_str());
+                */
+            }
             return values;
         }
     }
