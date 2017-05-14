@@ -21,8 +21,6 @@ else{
     CONFIG += release
     QMAKE_CXXFLAGS += -O2
 }
-
-CONFIG += static
 DEFINES += ELPP_QT_LOGGING    \
           ELPP_STL_LOGGING   \
           ELPP_STRICT_SIZE_CHECK ELPP_UNICODE \
@@ -103,3 +101,5 @@ FORMS += \
 
 RESOURCES += \
     res/mainwindow.qrc
+
+DISTFILES +=
