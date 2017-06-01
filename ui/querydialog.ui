@@ -6,22 +6,61 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
+    <width>547</width>
     <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>QueryDialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLineEdit" name="lineEdit">
+  <property name="windowIcon">
+   <iconset resource="../res/mainwindow.qrc">
+    <normaloff>:/logo.png</normaloff>:/logo.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <item>
+    <widget class="EnchancedLineEdit" name="lineEdit">
      <property name="readOnly">
       <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="wordLab">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ukPhonetic">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="phoneticBtn">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/mainwindow.qrc">
+         <normaloff>:/audio-volume-high.png</normaloff>:/audio-volume-high.png</iconset>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QTextBrowser" name="textBrowser">
      <property name="openExternalLinks">
       <bool>false</bool>
@@ -33,6 +72,15 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>EnchancedLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>lineedit/lineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../res/mainwindow.qrc"/>
+ </resources>
  <connections/>
 </ui>
