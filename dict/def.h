@@ -35,17 +35,23 @@
 #define def_min(a,b) ((a) < (b) ? (a):(b))
 #define def_max(a,b) ((a) > (b) ? (a):(b))
 
+#ifdef _WIN32
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#else
+#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#endif
+
 #if 0
 #if 1 //def DEBUG
-    #define LOGD(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[D]: %s\n", __FILE__, __LINE__, tmp);}while(0)
-    #define LOGI(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[I]: %s\n", __FILE__, __LINE__, tmp);}while(0)
-    #define LOGW(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[W]: %s\n", __FILE__, __LINE__, tmp);}while(0)
-    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILE__, __LINE__, tmp);}while(0)
+    #define LOGD(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[D]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
+    #define LOGI(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[I]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
+    #define LOGW(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[W]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
+    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
 #else
     #define LOGI(...)
 	#define LOGD(...) 
 	#define LOGW(...) 
-    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILE__, __LINE__, tmp);}while(0)
+    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
 #endif
 #else
 #if 1 //def DEBUG
