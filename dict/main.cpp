@@ -4,15 +4,11 @@
 #include "dict/youdao.h"
 #include "dict/def.h"
 
-#include "easylogging++.h"
-INITIALIZE_EASYLOGGINGPP
+#include "spdlog/spdlog.h"
 
 Q_DECLARE_METATYPE(dict::ResultVectorPtr)
 int main(int argc, const char **argv)
 {
-    START_EASYLOGGINGPP(argc, argv);
-    el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Format,
-                                       "%datetime %func[%fbase] %level: %msg");
     std::string word;
     if (argc < 2) {
 #if (QT_VERSION <= QT_VERSION_CHECK(5,0,0))

@@ -28,7 +28,8 @@
 #include <time.h>
 #include <signal.h>
 #include <sched.h>
-#include <easylogging++.h>
+
+#include <spdlog/spdlog.h>
 
 // el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Format, "%datetime %func[%fbase] %level: %msg");
 #define def_msleep(M) usleep(1000*(M))
@@ -41,31 +42,24 @@
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #endif
 
-#if 0
+#define XLOG_BUFFER_DEPTH (32)
+#define XLOG_BUFFER_SIZE (2048)
+#define XLOG_BUFFER_CACHE (1024)
+
 #if 1 //def DEBUG
-    #define LOGD(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[D]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
-    #define LOGI(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[I]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
-    #define LOGW(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[W]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
-    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
+#define LOGV(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[V]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
+#define LOGD(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[D]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
+#define LOGI(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[I]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
+#define LOGW(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[W]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
+#define LOGE(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[E]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
+#define LOGF(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[F]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
 #else
-    #define LOGI(...)
-	#define LOGD(...) 
-	#define LOGW(...) 
-    #define LOGE(...) do{char tmp[1024]={0x00};snprintf(tmp, 1023, __VA_ARGS__); printf("%s (%4d)[E]: %s\n", __FILENAME__, __LINE__, tmp);}while(0)
-#endif
-#else
-#if 1 //def DEBUG
-// Use default logger
-    #define LOGI(...) el::Loggers::getLogger("default")->info(__VA_ARGS__)
-    #define LOGD(...) el::Loggers::getLogger("default")->debug(__VA_ARGS__)
-	#define LOGW(...) el::Loggers::getLogger("default")->warn(__VA_ARGS__)
-    #define LOGE(...) el::Loggers::getLogger("default")->error(__VA_ARGS__)
-#else
-    #define LOGI(...)
-    #define LOGD(...)
-    #define LOGW(...)
-    #define LOGE(...) el::Loggers::getLogger("default")->error(__VA_ARGS__)
-#endif
+#define LOGV(...)
+#define LOGD(...)
+#define LOGI(...)
+#define LOGW(...)
+#define LOGE(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[E]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
+#define LOGF(...) do{char xlog_tmp_buf__[XLOG_BUFFER_SIZE]={0x00};snprintf(xlog_tmp_buf__, sizeof(xlog_tmp_buf__), __VA_ARGS__); fprintf(stderr, "%s (%4d)[F]: %s\n", __FILENAME__, __LINE__, xlog_tmp_buf__);}while(0)
 #endif
 
 #endif

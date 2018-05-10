@@ -2,6 +2,7 @@
 #define QUERYDIALOG_H
 
 #include <QDialog>
+#include <QTextToSpeech>
 #include "dict/dict.h"
 #include "mdialog.h"
 namespace Ui {
@@ -21,8 +22,12 @@ public slots:
     void showExplain(dict::ResultVectorPtr ptr);
 signals:
     void doShowExplain(dict::ResultVectorPtr ptr);
+private slots:
+    void on_phoneticBtn_clicked();
+
 private:
     Ui::QueryDialog *ui;
+    QTextToSpeech* speech;
 };
 
 #endif // QUERYDIALOG_H

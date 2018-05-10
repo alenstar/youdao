@@ -1,7 +1,6 @@
 #include "youdao.h"
 #include "def.h"
 
-#include <easylogging++.h>
 #include <tinyxml2/tinyxml2.h>
 #include <Document.h>
 #include <Selection.h>

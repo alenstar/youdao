@@ -39,6 +39,8 @@ QueryDialog::QueryDialog(QWidget *parent) :
     this->setTitle(title);
     connect(this, &QueryDialog::doShowExplain, this, &QueryDialog::onShowExplain);
     new ThreadPool(2);
+    this->speech = new QTextToSpeech(this);
+
 }
 
 QueryDialog::~QueryDialog()
@@ -68,6 +70,7 @@ void QueryDialog::onShowExplain(dict::ResultVectorPtr ptr)
         }
         else if(ptr->at(i - 0).session == std::string("keyword")) {
             this->ui->wordLab->setText(" " + QString(ptr->at(i - 0).value.c_str()));
+            speech->say(QString(ptr->at(i - 0).value.c_str()).simplified());
         } else {
             this->ui->textBrowser->append(QString(ptr->at(i - 0).value.c_str()));
             //this->ui->textBrowser->setText(QString(ptr->at(i - 0).value.c_str()));
@@ -79,4 +82,12 @@ void QueryDialog::onShowExplain(dict::ResultVectorPtr ptr)
 void QueryDialog::showExplain(dict::ResultVectorPtr ptr)
 {
     emit this->doShowExplain(ptr);
+}
+
+void QueryDialog::on_phoneticBtn_clicked()
+{
+    if(ui->wordLab->text().isEmpty()) {
+        return;
+    }
+    speech->say(ui->wordLab->text());
 }
